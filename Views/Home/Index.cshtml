@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<FoodStore.ViewModels.ProductWithManufacturer>
+@using PagedList.Mvc;
+
+
+@*
+    @model IEnumerable<FoodStore.ViewModels.ProductWithManufacturer>
+*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+
+    var searchWord = "";
+    if ( ViewBag.searchWord != null )
+    {
+        searchWord = ViewBag.searchWord;
+    }
+}
+<h4><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Food</h4>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+<form class="form-inline" role="form" data-toggle="validator" action="/Home/Index/">
+            <div class="col-xs-12 col-sm-8 text-center">
+
+                <div class="form-group">
+                    <input type="text" placeholder="Name or Mfg" class="form-control"
+                           name="searchWord" id="searchWord" value="@(searchWord)">
+                </div>
+                <button type="submit" class="btn btn-success">Search</button>
+</form>
+            
+        </div>
+        <div class="col-sm-2">@if (searchWord != "")
+        {
+            <a href="/Home/Index/"><span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> <em>All List</em></a>
+        }</div>
+    </div>
+</div>
+<p>&nbsp;</p>
+<div class="table-responsive">
+    <table class="table text-center">
+        <tr class="success">
+            <td>ProductID</td>
+            <td>@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.ProductNameOrder })</td>
+            <td>@Html.ActionLink("Mfg", "Index", new { sortOrder = ViewBag.ManufacturerOrder })</td>
+            <td>Vendor</td>
+            <td>Price</td>
+            <td>@Html.ActionLink("MfgDiscount", "Index", new { sortOrder = ViewBag.ManufacturerDiscountOrder })</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductID</td>
+                <td>@item.Name</td>
+                <td>@item.Mfg</td>
+                <td>@item.Vendor</td>
+                <td>@String.Format("{0:C}", @item.Price)</td>
+                <td>@item.MfgDiscount</td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="container text-center">
+    @*
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    *@
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.SearchWord }))
+</div>

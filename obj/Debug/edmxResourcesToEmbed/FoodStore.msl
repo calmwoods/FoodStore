@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FoodStoreModelStoreContainer" CdmEntityContainer="FoodStoreEntities">
+    <EntitySetMapping Name="Buildings">
+      <EntityTypeMapping TypeName="FoodStoreModel.Building">
+        <MappingFragment StoreEntitySet="Building">
+          <ScalarProperty Name="building_name" ColumnName="building_name" />
+          <ScalarProperty Name="unit_num" ColumnName="unit_num" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="FoodStoreModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="FoodStoreModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="invoiceNum" ColumnName="invoiceNum" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="FoodStoreModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturer">
+          <ScalarProperty Name="mfg" ColumnName="mfg" />
+          <ScalarProperty Name="mfgDiscount" ColumnName="mfgDiscount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="FoodStoreModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mfg" ColumnName="mfg" />
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductInvoiceWithQuantities">
+      <EntityTypeMapping TypeName="FoodStoreModel.ProductInvoiceWithQuantity">
+        <MappingFragment StoreEntitySet="ProductInvoiceWithQuantity">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="invoiceNum" ColumnName="invoiceNum" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrders">
+      <EntityTypeMapping TypeName="FoodStoreModel.PurchaseOrder">
+        <MappingFragment StoreEntitySet="PurchaseOrder">
+          <ScalarProperty Name="po_num" ColumnName="po_num" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="FoodStoreModel.Store">
+        <MappingFragment StoreEntitySet="Store">
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="building_name" ColumnName="building_name" />
+          <ScalarProperty Name="unit_num" ColumnName="unit_num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="FoodStoreModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="supplier_email" ColumnName="supplier_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProductInvoice" TypeName="FoodStoreModel.ProductInvoice" StoreEntitySet="ProductInvoice">
+      <EndProperty Name="Invoice">
+        <ScalarProperty Name="invoiceNum" ColumnName="invoiceNum" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="productID" ColumnName="productID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductPurchaseOrder" TypeName="FoodStoreModel.ProductPurchaseOrder" StoreEntitySet="ProductPurchaseOrder">
+      <EndProperty Name="PurchaseOrder">
+        <ScalarProperty Name="po_num" ColumnName="po_num" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="productID" ColumnName="productID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="spFindEmployee" FunctionName="FoodStoreModel.Store.spFindEmployee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FoodStoreModel.spFindEmployee_Result">
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spFindProduct" FunctionName="FoodStoreModel.Store.spFindProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FoodStoreModel.spFindProduct_Result">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetAllProducts" FunctionName="FoodStoreModel.Store.spGetAllProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FoodStoreModel.spGetAllProducts_Result">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mfg" ColumnName="mfg" />
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spProductDetail" FunctionName="FoodStoreModel.Store.spProductDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FoodStoreModel.spProductDetail_Result">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="mfg" ColumnName="mfg" />
+          <ScalarProperty Name="vendor" ColumnName="vendor" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spStoresByRegion" FunctionName="FoodStoreModel.Store.spStoresByRegion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FoodStoreModel.spStoresByRegion_Result">
+          <ScalarProperty Name="region" ColumnName="region" />
+          <ScalarProperty Name="building_name" ColumnName="building_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
